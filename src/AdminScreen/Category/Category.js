@@ -54,10 +54,9 @@ function Category() {
       <Button variant="outlined" startIcon={<DeleteIcon />}>
         Delete
       </Button>
-        {console.log(categoryList)}
       {categoryList.map((item, index) => {
         return (
-          <ul style={{ color: "#336699" }}>
+          <ul key={index} style={{ color: "#336699" }}>
             <li>
               <h1 key={index}>{item.name}</h1>
             </li>
