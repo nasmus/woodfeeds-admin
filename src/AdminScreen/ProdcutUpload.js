@@ -173,6 +173,7 @@ function ProdcutUpload() {
                     onEditorChange={(des, edt) => {
                       setDescription(des);
                     }}
+                    apiKey='fgipol2b63zlyibdodysp7um2z1in5jqmf1ghtbv0z03orz1'
                     init={{
                       height: 400,
                       menubar: false,
