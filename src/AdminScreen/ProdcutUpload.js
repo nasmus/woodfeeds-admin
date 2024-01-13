@@ -117,7 +117,7 @@ function ProdcutUpload() {
               <div>
                 <button
                   type="submit"
-                  class="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                  className="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
                 >
                   Upload Product
                 </button>
@@ -206,10 +206,10 @@ function ProdcutUpload() {
                       onChange={(e) => setCategoryId(e.target.value)}
                     >
                       <option>Select Category</option>
-                      {category.map((option) => {
+                      {category && category.map((option, index) => {
                         if (option.parentId === "")
                           return (
-                            <option key={option.value} value={option._id}>
+                            <option key={index} value={option._id}>
                               {option.name}
                             </option>
                           );
@@ -223,7 +223,6 @@ function ProdcutUpload() {
                     >
                       Sub Category
                     </label>
-                    {console.log(categoryId)}
                     <select
                       id="countries_multiple"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-4 md:w-60"
@@ -232,9 +231,9 @@ function ProdcutUpload() {
                     >
                       <option>Select Sub Category</option>
                       {chieldCategory &&
-                        chieldCategory.map((option) => {
+                        chieldCategory.map((option,index) => {
                           return (
-                            <option key={option.value} value={option._id}>
+                            <option key={index} value={option._id}>
                               {option.name}
                             </option>
                           );
@@ -358,22 +357,22 @@ function ProdcutUpload() {
                 <h3 className="my-3 text-lg font-semibold">Image Upload</h3>
                 <div>
                   <div className="image_grid">
-                    {multipleImage.map((images, index) => (
-                      <div className="image" key={index}>
+                    {multipleImage && multipleImage.map((images, index) => (
+                      <div key={index} className="image" >
                         <img src={URL.createObjectURL(images)} alt="" />
                       </div>
                     ))}
                   </div>
                 </div>
                 <div>
-                  <div class="flex items-center justify-center w-full">
+                  <div className="flex items-center justify-center w-full">
                     <label
-                      for="dropzone-file"
-                      class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                      htmlFor="dropzone-file"
+                      className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                     >
-                      <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                      <div className="flex flex-col items-center justify-center pt-5 pb-6">
                         <svg
-                          class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                          className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
                           aria-hidden="true"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -381,24 +380,24 @@ function ProdcutUpload() {
                         >
                           <path
                             stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
                             d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
                           />
                         </svg>
-                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                          <span class="font-semibold">Upload Image</span> or
+                        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                          <span className="font-semibold">Upload Image</span> or
                           drag and drop
                         </p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
                           SVG, PNG, JPG or GIF (MAX. 800x400px)
                         </p>
                       </div>
                       <input
                         id="dropzone-file"
                         type="file"
-                        class="hidden"
+                        className="hidden"
                         accept="image/*"
                         name="multipleImage"
                         multiple

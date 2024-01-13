@@ -136,9 +136,9 @@ function OrderDetails() {
                 </tr>
               </thead>
               {orderDetail.orderItems &&
-                orderDetail.orderItems.map((item) => {
+                orderDetail.orderItems.map((item,index) => {
                   return (
-                    <tbody>
+                    <tbody key={index}>
                       <tr className="bg-white border-b ">
                         <th
                           scope="row"
@@ -159,7 +159,7 @@ function OrderDetails() {
                           {item.price * item.quantity}
                         </td>
                         <td className="px-6 py-4">
-                          <span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+                          <span className="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
                             {item.orderStatus}
                           </span>
                         </td>
@@ -278,33 +278,33 @@ function OrderDetails() {
           </div>
         </div>
 
-        <div class="relative  sm:rounded-lg mt-14">
-          <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
+        <div className="relative  sm:rounded-lg mt-14">
+          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead className="text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
               <tr>
-                <th scope="col" class="px-3 py-1">
+                <th scope="col" className="px-3 py-1">
                   Item
                 </th>
-                <th scope="col" class="px-3 py-1">
+                <th scope="col" className="px-3 py-1">
                   Description
                 </th>
-                <th scope="col" class="px-3 py-1">
+                <th scope="col" className="px-3 py-1">
                   Qty
                 </th>
-                <th scope="col" class="px-3 py-1">
+                <th scope="col" className="px-3 py-1">
                   Unit Price
                 </th>
-                <th scope="col" class="px-3 py-1">
+                <th scope="col" className="px-3 py-1">
                   Amount
                 </th>
               </tr>
             </thead>
             {orderDetail.orderItems &&
-              orderDetail.orderItems.map((item) => {
+              orderDetail.orderItems.map((item,index) => {
                 return (
-                  <tbody>
-                    <tr class="bg-white border-b ">
-                      <td class="p-3">
+                  <tbody key={index} >
+                    <tr className="bg-white border-b ">
+                      <td className="p-3">
                         <img
                           src={`/images/${item.image}`}
                           alt=""
@@ -313,13 +313,13 @@ function OrderDetails() {
                       </td>
                       <th
                         scope="row"
-                        class="p-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                        className="p-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                       >
                         {item.name.slice(0, 50)}
                       </th>
-                      <td class="p-3">{item.quantity}</td>
-                      <td class="p-3">৳{item.price}</td>
-                      <td class="p-3">৳{item.price * item.quantity}</td>
+                      <td className="p-3">{item.quantity}</td>
+                      <td className="p-3">৳{item.price}</td>
+                      <td className="p-3">৳{item.price * item.quantity}</td>
                     </tr>
                   </tbody>
                 );
