@@ -40,59 +40,59 @@ function AllOrderScreen() {
     <div>
       <Sidebar />
 
-      <div class=" ml-52 relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <div className=" ml-52 relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-            <th scope="col" class="px-6 py-3">
+            <th scope="col" className="px-6 py-3">
                 index
               </th>
-              <th scope="col" class="px-6 py-3">
+              <th scope="col" className="px-6 py-3">
                 Order ID
               </th>
-              <th scope="col" class="px-6 py-3">
+              <th scope="col" className="px-6 py-3">
                 Payment
               </th>
-              <th scope="col" class="px-6 py-3">
+              <th scope="col" className="px-6 py-3">
                 items Price
               </th>
-              <th scope="col" class="px-6 py-3">
+              <th scope="col" className="px-6 py-3">
                 User name
               </th>
-              <th scope="col" class="px-6 py-3">
+              <th scope="col" className="px-6 py-3">
                 Order Date
               </th>
-              <th scope="col" class="px-6 py-3">
+              <th scope="col" className="px-6 py-3">
                 Order Time
               </th>
-              <th scope="col" class="px-6 py-3">
+              <th scope="col" className="px-6 py-3">
                 Order Status
               </th>
-              <th scope="col" class="px-6 py-3">
+              <th scope="col" className="px-6 py-3">
                 Action
               </th>
             </tr>
           </thead>
           <tbody>
             {currentProducts.toReversed().map((item, index) => (
-              <tr key={index} class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <td class="px-6 py-4">{index+1}</td>
+              <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <td className="px-6 py-4">{index+1}</td>
                 <th
                   scope="row"
-                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
                   {item._id}
                 </th>
-                <td class="px-6 py-4">{item.paymentMethod}</td>
-                <td class="px-6 py-4">{item.itemsPrice}</td>
-                <td class="px-6 py-4">{item.shippingAddress.fullName}</td>
-                <td class="px-6 py-4">{item.createdAt.slice(0, 10)}</td>
-                <td class="px-6 py-4">{item.createdAt.slice(11, 19)}</td>
-                <td class="px-6 py-4">
-                  {/* <span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">
+                <td className="px-6 py-4">{item.paymentMethod}</td>
+                <td className="px-6 py-4">{item.itemsPrice}</td>
+                <td className="px-6 py-4">{item.shippingAddress.fullName}</td>
+                <td className="px-6 py-4">{item.createdAt.slice(0, 10)}</td>
+                <td className="px-6 py-4">{item.createdAt.slice(11, 19)}</td>
+                <td className="px-6 py-4">
+                  {/* <span className="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">
                     Red
                   </span> */}
-                  <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
+                  <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
                     Delivered
                   </span>
                 </td>

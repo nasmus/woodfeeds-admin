@@ -98,8 +98,8 @@ function AdminDashboard() {
           </div>
           <div className="flex p-3 h-1/4 py-12 w-10/12 lg:py-7  lg:w-1/5 text-violet-600 bg-white justify-around items-center rounded-lg drop-shadow-xl my-4">
             <div className="left">
-              {totalSelles.map((item) => (
-                <h1 className=" text-3xl font-extrabold text-center ">
+              {totalSelles.map((item,index) => (
+                <h1 key={index} className=" text-3xl font-extrabold text-center ">
                   {item.totalSelles}
                 </h1>
               ))}
