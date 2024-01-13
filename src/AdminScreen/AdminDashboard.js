@@ -77,7 +77,7 @@ function AdminDashboard() {
           <div className="flex p-3 h-1/4 py-12 lg:py-7 w-10/12 lg:w-1/5  text-violet-600 bg-white justify-around items-center rounded-lg drop-shadow-xl mb-4">
             <div className="left">
               <h1 className=" text-3xl font-extrabold text-center">
-                {countProduct}
+                {countProduct > 0 ? countProduct : 0}
               </h1>
               <p>Total Product</p>
             </div>
@@ -88,21 +88,25 @@ function AdminDashboard() {
           <div className="flex p-3 h-1/6 py-12 w-10/12 lg:py-7   lg:w-1/5 text-violet-600 bg-white justify-around items-center rounded-lg drop-shadow-xl my-4">
             <div className="left">
               <h1 className="text-3xl font-extrabold text-center ">
-                {countOrder}
+                {countOrder > 0 ? countOrder : 0}
               </h1>
               <p>Product Orders</p>
             </div>
             <div className="right">
-              <AddAlertIcon className="" />
+              <AddAlertIcon />
             </div>
           </div>
           <div className="flex p-3 h-1/4 py-12 w-10/12 lg:py-7  lg:w-1/5 text-violet-600 bg-white justify-around items-center rounded-lg drop-shadow-xl my-4">
             <div className="left">
-              {totalSelles.map((item) => (
+              {totalSelles.length > 0 ? totalSelles.map((item,index) => (
                 <h1 className=" text-3xl font-extrabold text-center ">
                   {item.totalSelles}
                 </h1>
-              ))}
+              )) :
+              <h1 className=" text-3xl font-extrabold text-center ">
+                  {0}
+                </h1>
+              }
 
               <p>Total Sales</p>
             </div>
@@ -113,7 +117,7 @@ function AdminDashboard() {
           <div className="flex p-3 h-1/6 py-12 w-10/12 lg:py-7  lg:w-1/5 text-violet-600 bg-white  items-center justify-around rounded-lg drop-shadow-xl my-4">
             <div className="left">
               <h1 className="text-3xl font-extrabold text-center ">
-                {pandingOrder}
+                {pandingOrder > 0 ? pandingOrder : 0}
               </h1>
               <p>Pending Order</p>
             </div>
