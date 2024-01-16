@@ -68,6 +68,7 @@ function ProdcutUpload() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    handleUpload()
     const form = new FormData();
     form.append("name", name);
     form.append("description", description);
@@ -80,13 +81,13 @@ function ProdcutUpload() {
     form.append("thickness", thickness);
     form.append("color", color);
     form.append("productMaterials", productMaterials);
-    if (multipleImage) {
-      multipleImage.forEach((image, index) => {
-        form.append("multipleImage", image);
-      });
-    } else {
-      console.log("problem");
-    }
+    // if (multipleImage) {
+    //   multipleImage.forEach((image, index) => {
+    //     form.append("multipleImage", image);
+    //   });
+    // } else {
+    //   console.log("problem");
+    // }
 
     try {
       const upload = await axios.post(`/api/product/create`, form, {
@@ -97,6 +98,31 @@ function ProdcutUpload() {
       alert(error);
     }
   };
+
+  const handleUpload = async () => {
+    try {
+      const formData = new FormData();
+      if (multipleImage) {
+        multipleImage.forEach((image, index) => {
+          formData.append("multipleImage", image);
+        });
+      } else {
+        console.log("problem");
+      }
+
+      const response = await axios.post(`http://localhost:4000/api/image/upload`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      console.log('Image uploaded successfully:', response.data.imageUrl);
+    } catch (error) {
+      console.error('Error uploading image:', error.message);
+    }
+  };
+
+
   return (
     <div>
       <div className="hidden lg:block">
