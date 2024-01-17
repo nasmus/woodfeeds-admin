@@ -83,6 +83,7 @@ function ProdcutUpload() {
           'Content-Type': 'multipart/form-data',
         },
       });
+      setImageString(response.data.imageUrl)
       console.log('Image uploaded successfully:', response.data.imageUrl);
     } catch (error) {
       console.error('Error uploading image:', error.message);
