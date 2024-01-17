@@ -90,7 +90,7 @@ function ProdcutUpload() {
     }
 
     try {
-      const upload = await axios.post(`https://server.woodfeeds.com/images/api/product/create`, form, {
+      const upload = await axios.post(`/api/product/create`, form, {
         headers: { Authorization: `Bearer ${userInfo.token}` },
       });
       alert("product upload successfully");
@@ -110,7 +110,7 @@ function ProdcutUpload() {
         console.log("problem");
       }
 
-      const response = await axios.post(`http://localhost:4000/api/image/upload`, formData, {
+      const response = await axios.post(`https://server.woodfeeds.com/api/image/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
