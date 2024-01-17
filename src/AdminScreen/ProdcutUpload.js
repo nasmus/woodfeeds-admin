@@ -23,7 +23,6 @@ function ProdcutUpload() {
   const [thickness, setThickness] = useState('');
   const [color, setColor] = useState('');
   const [productMaterials, setProductMaterials] = useState('')
-  const [imageString, setImageString] = useState();
 
   const editorRef = useRef(null);
 
@@ -67,33 +66,11 @@ function ProdcutUpload() {
     setSubmitCategory(chieldCategoryId);
   }, [chieldCategoryId]);
 
-  const handleUpload = async () => {
-    try {
-      const formData = new FormData();
-      if (multipleImage) {
-        multipleImage.forEach((image, index) => {
-          formData.append("multipleImage", image);
-        });
-      } else {
-        console.log("problem");
-      }
-
-      const response = await axios.post(`https://server.woodfeeds.com:443/api/image/upload`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      setImageString(response.data.imageUrl)
-      console.log('Image uploaded successfully:', response.data.imageUrl);
-    } catch (error) {
-      console.error('Error uploading image:', error.message);
-    }
-  };
+  
   
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    handleUpload()
     const form = new FormData();
     form.append("name", name);
     form.append("description", description);
@@ -106,20 +83,23 @@ function ProdcutUpload() {
     form.append("thickness", thickness);
     form.append("color", color);
     form.append("productMaterials", productMaterials);
-    form.append('multipleImage', imageString)
-    // if (multipleImage) {
-    //   multipleImage.forEach((image, index) => {
-    //     form.append("multipleImage", image);
-    //   });
-    // } else {
-    //   console.log("problem");
-    // }
+    
+    if (multipleImage) {
+      multipleImage.forEach((image, index) => {
+        form.append("multipleImage", image);
+      });
+    } else {
+      console.log("problem");
+    }
 
     try {
       const upload = await axios.post(`/api/product/create`, form, {
         headers: { Authorization: `Bearer ${userInfo.token}` },
       });
+      const response = await axios.post(`https://server.woodfeeds.com:443/api/image/upload`, form);
+      //const response = await axios.post(`http://localhost:4000/api/image/upload`, form)
       alert("product upload successfully");
+      console.log(response.data)
     } catch (error) {
       alert(error);
     }
