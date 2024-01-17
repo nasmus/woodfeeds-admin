@@ -68,7 +68,7 @@ function ProdcutUpload() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await handleUpload()
+    handleUpload()
     const form = new FormData();
     form.append("name", name);
     form.append("description", description);
@@ -81,13 +81,13 @@ function ProdcutUpload() {
     form.append("thickness", thickness);
     form.append("color", color);
     form.append("productMaterials", productMaterials);
-    if (multipleImage) {
-      multipleImage.forEach((image, index) => {
-        form.append("multipleImage", image);
-      });
-    } else {
-      console.log("problem");
-    }
+    // if (multipleImage) {
+    //   multipleImage.forEach((image, index) => {
+    //     form.append("multipleImage", image);
+    //   });
+    // } else {
+    //   console.log("problem");
+    // }
 
     try {
       const upload = await axios.post(`/api/product/create`, form, {
@@ -110,7 +110,7 @@ function ProdcutUpload() {
         console.log("problem");
       }
 
-      const response = await axios.post(`https://server.woodfeeds.com/api/image/upload`, formData, {
+      const response = await axios.post(`http://localhost:5000/api/image/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
