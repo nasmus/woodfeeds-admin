@@ -81,16 +81,16 @@ function ProdcutUpload() {
     form.append("thickness", thickness);
     form.append("color", color);
     form.append("productMaterials", productMaterials);
-    // if (multipleImage) {
-    //   multipleImage.forEach((image, index) => {
-    //     form.append("multipleImage", image);
-    //   });
-    // } else {
-    //   console.log("problem");
-    // }
+    if (multipleImage) {
+      multipleImage.forEach((image, index) => {
+        form.append("multipleImage", image);
+      });
+    } else {
+      console.log("problem");
+    }
 
     try {
-      const upload = await axios.post(`/api/product/create`, form, {
+      const upload = await axios.post(`https://server.woodfeeds.com/images/api/product/create`, form, {
         headers: { Authorization: `Bearer ${userInfo.token}` },
       });
       alert("product upload successfully");
