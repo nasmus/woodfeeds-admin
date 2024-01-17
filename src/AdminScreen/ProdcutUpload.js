@@ -67,6 +67,29 @@ function ProdcutUpload() {
     setSubmitCategory(chieldCategoryId);
   }, [chieldCategoryId]);
 
+  const handleUpload = async () => {
+    try {
+      const formData = new FormData();
+      if (multipleImage) {
+        multipleImage.forEach((image, index) => {
+          formData.append("multipleImage", image);
+        });
+      } else {
+        console.log("problem");
+      }
+
+      const response = await axios.post(`https://server.woodfeeds.com:443/api/image/upload`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log('Image uploaded successfully:', response.data.imageUrl);
+    } catch (error) {
+      console.error('Error uploading image:', error.message);
+    }
+  };
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     handleUpload()
@@ -98,29 +121,6 @@ function ProdcutUpload() {
       alert("product upload successfully");
     } catch (error) {
       alert(error);
-    }
-  };
-
-  const handleUpload = async () => {
-    try {
-      const formData = new FormData();
-      if (multipleImage) {
-        multipleImage.forEach((image, index) => {
-          formData.append("multipleImage", image);
-        });
-      } else {
-        console.log("problem");
-      }
-
-      const response = await axios.post(`https://server.woodfeeds.com:443/api/image/upload`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      setImageString(response.data.imageUrl)
-      console.log('Image uploaded successfully:', response.data.imageUrl);
-    } catch (error) {
-      console.error('Error uploading image:', error.message);
     }
   };
 
