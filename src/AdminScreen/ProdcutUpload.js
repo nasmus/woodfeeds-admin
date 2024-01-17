@@ -23,6 +23,7 @@ function ProdcutUpload() {
   const [thickness, setThickness] = useState('');
   const [color, setColor] = useState('');
   const [productMaterials, setProductMaterials] = useState('')
+  const [imageString, setImageString] = useState();
 
   const editorRef = useRef(null);
 
@@ -81,6 +82,7 @@ function ProdcutUpload() {
     form.append("thickness", thickness);
     form.append("color", color);
     form.append("productMaterials", productMaterials);
+    form.append('multipleImage', imageString)
     // if (multipleImage) {
     //   multipleImage.forEach((image, index) => {
     //     form.append("multipleImage", image);
@@ -115,7 +117,7 @@ function ProdcutUpload() {
           'Content-Type': 'multipart/form-data',
         },
       });
-
+      setImageString(response.data.imageUrl)
       console.log('Image uploaded successfully:', response.data.imageUrl);
     } catch (error) {
       console.error('Error uploading image:', error.message);
