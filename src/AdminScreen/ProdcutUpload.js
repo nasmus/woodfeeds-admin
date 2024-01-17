@@ -68,7 +68,7 @@ function ProdcutUpload() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    handleUpload()
+    await handleUpload()
     const form = new FormData();
     form.append("name", name);
     form.append("description", description);
