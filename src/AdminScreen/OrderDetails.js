@@ -105,15 +105,46 @@ function OrderDetails() {
               <option value="Shipped">Shipped</option>
               <option value="Received">Received</option>
             </select>
-            <button className="bg-green-500 w-full hover:bg-green-600 p-2 ml-2 md:ml-0 md:px-6 md:my-1.5 text-white rounded-lg">
+            <button className="bg-cyan-500 w-full hover:bg-cyan-600 p-2 ml-2 md:ml-0 md:px-6 md:my-1.5 text-white rounded-lg">
               Submit
             </button>
           </form>
         </div>
       </div>
 
-      <div className=" px-5 py-5 md:flex w-full lg:w-10/12 ">
-        <section className="md:w-4/5 md:px-6 text-black">
+      <div className="pt-14 px-5 flex justify-between  text-slate-500">
+        <div className="flex">
+          <div className="">
+            <h5 className="text-black font-semibold me-5">Bill to:</h5>
+          </div>
+          <div>
+            <p>
+              {orderDetail.shippingAddress &&
+                orderDetail.shippingAddress.fullName}
+            </p>
+            <p>
+              {orderDetail.shippingAddress &&
+                orderDetail.shippingAddress.address}
+            </p>
+            <p>
+              <span>City: </span>
+              {orderDetail.shippingAddress && orderDetail.shippingAddress.city}
+            </p>
+            <p>
+              {orderDetail.shippingAddress &&
+                orderDetail.shippingAddress.phoneNumber}
+            </p>
+          </div>
+        </div>
+        <div className="flex ">
+          <div className="text-black font-semibold me-5">Date:</div>
+          <div>
+            {orderDetail.updatedAt && orderDetail.updatedAt.slice(0, 10)}
+          </div>
+        </div>
+      </div>
+      <div className=" px-5 py-5 w-full ">
+        <section className=" md:px-6 text-black">
           <div className="relative overflow-x-auto py-3 md:py-6">
             <table className="w-full text-sm text-left rtl:text-right text-black font-medium">
               <thead className="text-xs text-gray-700 uppercase bg-gray-50  ">
@@ -136,7 +167,7 @@ function OrderDetails() {
                 </tr>
               </thead>
               {orderDetail.orderItems &&
-                orderDetail.orderItems.map((item,index) => {
+                orderDetail.orderItems.map((item, index) => {
                   return (
                     <tbody key={index}>
                       <tr className="bg-white border-b ">
@@ -170,70 +201,6 @@ function OrderDetails() {
             </table>
           </div>
         </section>
-        <section className="py-6 ">
-          <div className="bg-gradient-to-tr from-gray-700 to-gray-600 text-white rounded-lg w-11/12 p-5 print:w-full">
-            <h1 className="text-4xl  font-bold">Address Info.</h1>
-            <div className="pt-6">
-              <div className="text-lg">
-                <div className="flex py-3 justify-center">
-                  <p className="pr-4">Name:</p>
-                  <p>
-                    {orderDetail.shippingAddress &&
-                      orderDetail.shippingAddress.fullName}
-                  </p>
-                </div>
-                <div className="flex justify-center">
-                  <p className="px-4 ">UserId: </p>
-                  <p className=" pr-4 ">{orderDetail.user}</p>
-                </div>
-              </div>
-              <div className="flex text-cyan-500">
-                <p>Address: </p>
-                <p>
-                  {orderDetail.shippingAddress &&
-                    orderDetail.shippingAddress.address}
-                </p>
-              </div>
-
-              <div className="text-cyan-500">
-                <div className="flex">
-                  <p>District: </p>
-                  <p>
-                    {orderDetail.shippingAddress &&
-                      orderDetail.shippingAddress.distric}
-                  </p>
-                </div>
-                <div className="flex">
-                  <p className="">Thana: </p>
-                  <p className="">
-                    {orderDetail.shippingAddress &&
-                      orderDetail.shippingAddress.city}
-                  </p>
-                </div>
-                <div className="flex ">
-                  <p>Phone : </p>
-                  <p>
-                    {orderDetail.shippingAddress &&
-                      orderDetail.shippingAddress.phoneNumber}
-                  </p>
-                </div>
-
-                <div className="flex py-3 text-emerald-500 justify-between">
-                  <p className=" font-bold text-2xl">Total amount: </p>
-                  <p className="font-bold text-2xl ">৳545</p>
-                </div>
-              </div>
-              <div className="flex justify-center py-1">
-                <button
-                  onClick={handlePrint}
-                  className="text-xl border px-6 py-1 rounded-full print:hidden  "
-                >
-                  Invoice
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
       </div>
       <div ref={printRef} className="hidden print:block mx-28 text-black">
         <h2 className="text-6xl pt-10 text-black font-semibold text-center">
@@ -252,7 +219,6 @@ function OrderDetails() {
               <h5 className="text-black font-semibold me-5">Bill to:</h5>
             </div>
             <div>
-              
               <p>
                 {orderDetail.shippingAddress &&
                   orderDetail.shippingAddress.fullName}
@@ -274,7 +240,9 @@ function OrderDetails() {
           </div>
           <div className="flex ">
             <div className="text-black font-semibold me-5">Date:</div>
-            <div>{orderDetail.updatedAt && orderDetail.updatedAt.slice(0, 10)}</div>
+            <div>
+              {orderDetail.updatedAt && orderDetail.updatedAt.slice(0, 10)}
+            </div>
           </div>
         </div>
 
@@ -300,9 +268,9 @@ function OrderDetails() {
               </tr>
             </thead>
             {orderDetail.orderItems &&
-              orderDetail.orderItems.map((item,index) => {
+              orderDetail.orderItems.map((item, index) => {
                 return (
-                  <tbody key={index} >
+                  <tbody key={index}>
                     <tr className="bg-white border-b ">
                       <td className="p-3">
                         <img
@@ -329,6 +297,11 @@ function OrderDetails() {
             Subtotal : ৳125
           </h4>
         </div>
+      </div>
+      <div className='flex items-center justify-center'>
+        <button onClick={handlePrint} className=" bg-cyan-500 w-1/4 transition-colors hover:bg-cyan-600 p-2 ml-2 md:ml-0 md:px-6 md:my-2 text-white rounded-lg">
+          Generate Invoice
+        </button>
       </div>
     </div>
   );
