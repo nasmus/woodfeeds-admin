@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { Store } from "../Store";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../Component/Sidebar";
 import "../Css/SellerDashboard.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { Store } from "../Store";
 
 function AdminProductList() {
   const navigate = useNavigate();
@@ -236,11 +236,14 @@ function AdminProductList() {
             <tbody>
               {currentProducts.map((item, index) => {
                 return (
-                  <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <tr
+                    key={index}
+                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                  >
                     <th>
                       <img
                         className=" p-1 h-12 "
-                        src={`/images/${item.image}`}
+                        src={`${process.env.REACT_APP_IMAGE_URL}/images/${item.image}`}
                         alt=""
                       />
                     </th>

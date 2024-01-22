@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useReducer, useState } from "react";
-import { Store } from "../Store";
-import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
-import { getError } from "../utils";
 import { Avatar } from "@mui/material";
+import axios from "axios";
+import React, { useContext, useEffect, useReducer, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../Component/Sidebar";
+import { Store } from "../Store";
+import { getError } from "../utils";
 
 
 const reducer = (state, action) => {
@@ -77,7 +77,7 @@ function ProductDetailsScreen() {
                 return (
                   <img
                     className=" w-11/12 border-2"
-                    src={`/images/${image}`}
+                    src={`${process.env.REACT_APP_IMAGE_URL}/images/${image}`}
                     alt=""
                   />
                 );
