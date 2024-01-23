@@ -1,3 +1,5 @@
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -26,6 +28,18 @@ function AllOrderScreen() {
     fatchData();
   }, [userInfo.token]);
 
+  const handleDelete = async (id) => {
+    try {
+      const response = await axios.delete(`/api/orderdelete/${id}`, {
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      });
+      alert('Order deleted succesfully!')
+    } catch (err) {
+      alert("Failed to delete product!");
+      
+    }
+  }
+
   // Calculate the indexes for the products to be displayed on the current page
   const indexOfLastProduct = currentPage * productsOrderPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsOrderPerPage;
@@ -44,7 +58,7 @@ function AllOrderScreen() {
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-            <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-3">
                 index
               </th>
               <th scope="col" className="px-6 py-3">
@@ -75,8 +89,11 @@ function AllOrderScreen() {
           </thead>
           <tbody>
             {currentProducts.toReversed().map((item, index) => (
-              <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <td className="px-6 py-4">{index+1}</td>
+              <tr
+                key={index}
+                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+              >
+                <td className="px-6 py-4">{index + 1}</td>
                 <th
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -96,14 +113,26 @@ function AllOrderScreen() {
                     Delivered
                   </span>
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-6 py-4 flex">
                   <button
-                    className="px-3 py-2 text-xs font-medium text-center text-white bg-gradient-to-r rounded-lg from-cyan-400 via-cyan-500 to-cyan-600 focus:ring-4 focus:outline-none focus:ring-blue-300 "
+                    type="button"
+                    className="me-2 p-1.5 text-xs font-medium text-center text-white bg-gradient-to-r rounded-lg from-cyan-400 via-cyan-500 to-cyan-600 focus:ring-4 focus:outline-none focus:ring-blue-300 "
+                    variant="contained"
+                    color="success"
                     onClick={() => {
                       navigate(`/orderdetails/${item._id}`);
                     }}
                   >
-                    Order Details
+                    <ModeEditIcon />
+                  </button>
+                  <button
+                    type="button"
+                    className=" p-1.5 text-xs font-medium text-center text-white rounded-lg bg-red-500 focus:ring-4 focus:outline-none focus:ring-blue-300 "
+                    variant="contained"
+                    color="success"
+                    onClick={() => handleDelete(item._id)}
+                  >
+                    <DeleteIcon />
                   </button>
                 </td>
               </tr>
@@ -111,14 +140,18 @@ function AllOrderScreen() {
           </tbody>
         </table>
         <div className="flex justify-center items-center pt-4">
-        {Array.from({
-          length: Math.ceil(allOrder.length / productsOrderPerPage),
-        }).map((_, index) => (
-          <button className="px-3 mr-1 py-2 text-xs font-medium text-center text-white bg-cyan-500 rounded-lg hover:bg-cyan-700  focus:outline-none focus:ring-blue-300 " key={index} onClick={() => paginate(index + 1)}>
-             <b>{index + 1}</b>
-          </button>
-        ))}
-      </div>
+          {Array.from({
+            length: Math.ceil(allOrder.length / productsOrderPerPage),
+          }).map((_, index) => (
+            <button
+              className="px-3 mr-1 py-2 text-xs font-medium text-center text-white bg-cyan-500 rounded-lg hover:bg-cyan-700  focus:outline-none focus:ring-blue-300 "
+              key={index}
+              onClick={() => paginate(index + 1)}
+            >
+              <b>{index + 1}</b>
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
