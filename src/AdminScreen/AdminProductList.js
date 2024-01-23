@@ -1,3 +1,5 @@
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -24,6 +26,20 @@ function AdminProductList() {
     };
     fatchDate();
   }, [userInfo.token]);
+
+  
+    const handleDelete = async (id) => {
+      const response = await axios.delete(`/api/delete/${id}`, {
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      }); 
+      if (response.status === 201) {
+        alert('Product delete successfully!');
+      } else {
+        alert('Failed to delete product');
+      }
+    }
+
+  
 
   // Calculate the indexes for the products to be displayed on the current page
   const indexOfLastProduct = currentPage * productsPerPage;
@@ -259,17 +275,26 @@ function AdminProductList() {
                     <td className="px-6 py-4">{item.countInStock}</td>
                     <td className="px-6 py-4">{item.rating}</td>
                     <td className="px-6 py-4">{item.numReviews}</td>
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-4 flex">
                       <button
                         type="button"
-                        className="px-3 py-2 text-xs font-medium text-center text-white bg-gradient-to-r rounded-lg from-cyan-400 via-cyan-500 to-cyan-600 focus:ring-4 focus:outline-none focus:ring-blue-300 "
+                        className="me-2 p-1.5 text-xs font-medium text-center text-white bg-gradient-to-r rounded-lg from-cyan-400 via-cyan-500 to-cyan-600 focus:ring-4 focus:outline-none focus:ring-blue-300 "
                         variant="contained"
                         color="success"
                         onClick={() => {
                           navigate(`/productdetails/${item._id}`);
                         }}
                       >
-                        Product Details
+                        <ModeEditIcon />
+                      </button>
+                      <button
+                        type="button"
+                        className=" p-1.5 text-xs font-medium text-center text-white rounded-lg bg-red-500 focus:ring-4 focus:outline-none focus:ring-blue-300 "
+                        variant="contained"
+                        color="success"
+                        onClick={() => handleDelete(item._id)}
+                      >
+                        <DeleteIcon />
                       </button>
                     </td>
                   </tr>
