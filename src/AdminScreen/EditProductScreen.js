@@ -1,16 +1,16 @@
+import { Editor } from "@tinymce/tinymce-react";
+import axios from "axios";
 import React, {
   useContext,
   useEffect,
   useReducer,
-  useState,
   useRef,
+  useState,
 } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../Component/Sidebar";
 import { Store } from "../Store";
-import { useNavigate, useParams } from "react-router-dom";
 import { getError } from "../utils";
-import axios from "axios";
-import { Editor } from "@tinymce/tinymce-react";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -58,6 +58,11 @@ function EditProductScreen() {
   const [viewCategory, setViewCategory] = useState("");
   const [viewImage, setViewImage] = useState([]);
   const [newImage, setNewImage] = useState(null);
+  const [height, setHeight] = useState("");
+  const [width, setWidth] = useState("");
+  const [thickness, setThickness] = useState("");
+  const [color, setColor] = useState("");
+  const [productMaterials, setProductMaterials] = useState("");
 
   const handleMultipleImageChange = (e) => {
     const files = e.target.files;
@@ -123,27 +128,27 @@ function EditProductScreen() {
     <div>
       <Sidebar />
       <div style={{ paddingLeft: "200px" }}>
-      <form
-            onSubmit={handleUpdateData}
-            method="post"
-            encType="multipart/form-data"
-            className="row g-3"
-          >
-        <div className="w-full min-h-screen p-4 bg-gray-100">
-          <div className="flex justify-between border-b-2 pb-2">
-            <div className="flex">
-              <h1 className="text-2xl font-semibold">Edit Prodcut</h1>
+        <form
+          onSubmit={handleUpdateData}
+          method="post"
+          encType="multipart/form-data"
+          className="row g-3"
+        >
+          <div className="w-full min-h-screen p-4 bg-gray-100">
+            <div className="flex justify-between border-b-2 pb-2">
+              <div className="flex">
+                <h1 className="text-2xl font-semibold">Edit Prodcut</h1>
+              </div>
+              <div>
+                <button
+                  type="submit"
+                  class="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                >
+                  Update Product
+                </button>
+              </div>
             </div>
-            <div>
-              <button
-                type="submit"
-                class="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-              >
-                Update Product
-              </button>
-            </div>
-          </div>
-          
+
             <div className="md:flex">
               <section className="bg-slate-50 p-2 m-2 md:w-2/3">
                 <h3 className="my-3 text-lg font-semibold">
@@ -306,6 +311,86 @@ function EditProductScreen() {
                     />
                   </div>
                 </div>
+                <div className="flex flex-wrap -mx-3 mb-2">
+                  <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label
+                      className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                      for="grid-city"
+                    >
+                      Height
+                    </label>
+                    <input
+                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      id="grid-city"
+                      type="text"
+                      value={height}
+                      placeholder="Height"
+                      onChange={(e) => setHeight(e.target.value)}
+                    />
+                  </div>
+                  <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label
+                      className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                      for="grid-city"
+                    >
+                      Width
+                    </label>
+                    <input
+                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      id="grid-city"
+                      type="text"
+                      value={width}
+                      placeholder="Width"
+                      onChange={(e) => setWidth(e.target.value)}
+                    />
+                  </div>
+                  <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label
+                      className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                      for="grid-zip"
+                    >
+                      Thickness
+                    </label>
+                    <input
+                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      id="grid-zip"
+                      type="text"
+                      value={thickness}
+                      placeholder="Product Thickness"
+                      onChange={(e) => setThickness(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="flex justify-between ">
+                  <div>
+                    <label
+                      htmlFor="countries_multiple"
+                      className="block mb-2 text-sm font-semibold text-gray-900  w-full "
+                    >
+                      Color
+                    </label>
+                    <input
+                      type="text"
+                      className="p-2.5 mb-2 rounded-lg w-full border-2 md:w-60"
+                      value={color}
+                      onChange={(e) => setColor(e.target.value)}
+                    />
+                  </div>
+                  <div className="pl-16 md:pl-40">
+                    <label
+                      htmlFor="countries_multiple"
+                      className="block mb-2 text-sm font-semibold text-gray-900  w-full "
+                    >
+                      product Materials
+                    </label>
+                    <input
+                      type="text"
+                      className="p-2.5 mb-2 rounded-lg w-full border-2 md:w-60"
+                      value={productMaterials}
+                      onChange={(e) => setProductMaterials(e.target.value)}
+                    />
+                  </div>
+                </div>
               </section>
               <section className="bg-slate-50 p-2 m-1 md:w-1/3">
                 <h3 className="my-3 text-lg font-semibold">Image Upload</h3>
@@ -363,8 +448,7 @@ function EditProductScreen() {
                 </div>
               </section>
             </div>
-          
-        </div>
+          </div>
         </form>
       </div>
     </div>

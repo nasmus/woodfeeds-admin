@@ -100,6 +100,27 @@ function ProdcutUpload() {
       //const response = await axios.post(`http://localhost:4000/api/image/upload`, form)
       alert("product upload successfully");
       console.log(response.data)
+      
+      setName("");
+      setPrice("");
+      setCategory('');
+      setCategoryId('')
+      setChieldCategory('')
+      setChieldCategoryId('')
+      setBrand('')
+      setDescription('')
+      setCountInStock('')
+      setMultipleImages('')
+      setSubmitCategory('')
+      setHeight('')
+      setWidth('')
+      setThickness('');
+      setColor('')
+      setProductMaterials('')
+
+
+
+      
     } catch (error) {
       alert(error);
     }
@@ -369,7 +390,7 @@ function ProdcutUpload() {
                   <div className="image_grid">
                     {multipleImage && multipleImage.map((images, index) => (
                       <div key={index} className="image" >
-                        <img src={URL.createObjectURL(images)} alt="" />
+                        <img className="max-h-80 w-full object-scale-down" src={URL.createObjectURL(images)} alt="" />
                       </div>
                     ))}
                   </div>
