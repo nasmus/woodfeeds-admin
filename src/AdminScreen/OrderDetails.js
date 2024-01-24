@@ -176,7 +176,7 @@ function OrderDetails() {
                           className="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
                         >
                           <img
-                            src={`/images/${item.image}`}
+                            src={`${process.env.REACT_APP_IMAGE_URL}/images/${item.image}`}
                             alt=""
                             className="w-8 h-8"
                           />
@@ -274,7 +274,7 @@ function OrderDetails() {
                     <tr className="bg-white border-b ">
                       <td className="p-3">
                         <img
-                          src={`/images/${item.image}`}
+                          src={`${process.env.REACT_APP_IMAGE_URL}/images/${item.image}`}
                           alt=""
                           className="w-8 h-8"
                         />
