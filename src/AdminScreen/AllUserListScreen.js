@@ -1,7 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { Store } from "../Store";
+import React, { useContext, useEffect, useState } from "react";
+import MobileSidebar from "../Component/MobileSidebar";
 import Sidebar from "../Component/Sidebar";
+import { Store } from "../Store";
 
 function AllUserListScreen() {
   const { state } = useContext(Store);
@@ -38,9 +39,14 @@ function AllUserListScreen() {
 
   return (
     <div>
-      <Sidebar />
+      <div className="hidden lg:block">
+        <Sidebar />
+      </div>
+      <div className="lg:hidden">
+        <MobileSidebar />
+      </div>
 
-      <div className=" ml-52 relative overflow-x-auto shadow-md sm:rounded-lg">
+      <div className=" lg:ml-52 ml-2 relative overflow-x-auto shadow-md sm:rounded-lg">
         <div className="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
           <div>
             <button
@@ -255,15 +261,19 @@ function AllUserListScreen() {
           </tbody>
         </table>
         {/* Pagination */}
-      <div className="flex justify-center items-center pt-4">
-        {Array.from({
-          length: Math.ceil(allUserList.length / userPerPage),
-        }).map((_, index) => (
-          <button className="px-3 mr-1 py-2 text-xs font-medium text-center text-white bg-cyan-500 rounded-lg hover:bg-cyan-700  focus:outline-none focus:ring-blue-300 " key={index} onClick={() => paginate(index + 1)}>
-             <b>{index + 1}</b>
-          </button>
-        ))}
-      </div>
+        <div className="flex justify-center items-center pt-4">
+          {Array.from({
+            length: Math.ceil(allUserList.length / userPerPage),
+          }).map((_, index) => (
+            <button
+              className="px-3 mr-1 py-2 text-xs font-medium text-center text-white bg-cyan-500 rounded-lg hover:bg-cyan-700  focus:outline-none focus:ring-blue-300 "
+              key={index}
+              onClick={() => paginate(index + 1)}
+            >
+              <b>{index + 1}</b>
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

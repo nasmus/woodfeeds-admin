@@ -8,6 +8,7 @@ import React, {
   useState,
 } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import MobileSidebar from "../Component/MobileSidebar";
 import Sidebar from "../Component/Sidebar";
 import { Store } from "../Store";
 import { getError } from "../utils";
@@ -126,8 +127,13 @@ function EditProductScreen() {
 
   return (
     <div>
-      <Sidebar />
-      <div style={{ paddingLeft: "200px" }}>
+      <div className="hidden lg:block">
+        <Sidebar />
+      </div>
+      <div className="lg:hidden">
+        <MobileSidebar />
+      </div>
+      <div className="lg:ml-52 ml-2">
         <form
           onSubmit={handleUpdateData}
           method="post"
