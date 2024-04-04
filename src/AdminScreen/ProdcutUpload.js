@@ -1,6 +1,7 @@
 import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
 import React, { useContext, useEffect, useRef, useState } from "react";
+import MobileSidebar from "../Component/MobileSidebar";
 import Sidebar from "../Component/Sidebar";
 import { Store } from "../Store";
 
@@ -132,6 +133,9 @@ function ProdcutUpload() {
       <div className="hidden lg:block">
         <Sidebar />
       </div>
+      <div className="lg:hidden">
+        <MobileSidebar />
+      </div>
       <div className="lg:pl-52">
         <form
           onSubmit={handleSubmit}
@@ -203,7 +207,7 @@ function ProdcutUpload() {
                     onEditorChange={(des, edt) => {
                       setDescription(des);
                     }}
-                    apiKey='fgipol2b63zlyibdodysp7um2z1in5jqmf1ghtbv0z03orz1'
+                    apiKey="fgipol2b63zlyibdodysp7um2z1in5jqmf1ghtbv0z03orz1"
                     init={{
                       height: 400,
                       menubar: false,
@@ -237,14 +241,15 @@ function ProdcutUpload() {
                       onChange={(e) => setCategoryId(e.target.value)}
                     >
                       <option>Select Category</option>
-                      {category && category.map((option, index) => {
-                        if (option.parentId === "")
-                          return (
-                            <option key={index} value={option._id}>
-                              {option.name}
-                            </option>
-                          );
-                      })}
+                      {category &&
+                        category.map((option, index) => {
+                          if (option.parentId === "")
+                            return (
+                              <option key={index} value={option._id}>
+                                {option.name}
+                              </option>
+                            );
+                        })}
                     </select>
                   </div>
                   <div className="pl-16 md:pl-10">
@@ -262,7 +267,7 @@ function ProdcutUpload() {
                     >
                       <option>Select Sub Category</option>
                       {chieldCategory &&
-                        chieldCategory.map((option,index) => {
+                        chieldCategory.map((option, index) => {
                           return (
                             <option key={index} value={option._id}>
                               {option.name}
@@ -388,11 +393,16 @@ function ProdcutUpload() {
                 <h3 className="my-3 text-lg font-semibold">Image Upload</h3>
                 <div>
                   <div className="image_grid">
-                    {multipleImage && multipleImage.map((images, index) => (
-                      <div key={index} className="image" >
-                        <img className="max-h-80 w-full object-scale-down" src={URL.createObjectURL(images)} alt="" />
-                      </div>
-                    ))}
+                    {multipleImage &&
+                      multipleImage.map((images, index) => (
+                        <div key={index} className="image">
+                          <img
+                            className="max-h-80 w-full object-scale-down"
+                            src={URL.createObjectURL(images)}
+                            alt=""
+                          />
+                        </div>
+                      ))}
                   </div>
                 </div>
                 <div>

@@ -2,6 +2,7 @@ import { Avatar } from "@mui/material";
 import axios from "axios";
 import React, { useContext, useEffect, useReducer, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import MobileSidebar from "../Component/MobileSidebar";
 import Sidebar from "../Component/Sidebar";
 import { Store } from "../Store";
 import { getError } from "../utils";
@@ -54,8 +55,13 @@ function ProductDetailsScreen() {
   }, [product.multipleImage]);
   return (
     <div>
-      <Sidebar />
-      <div className=" ml-52 pt-2 ">
+      <div className="hidden lg:block">
+        <Sidebar />
+      </div>
+      <div className="lg:hidden">
+        <MobileSidebar />
+      </div>
+      <div className="lg:ml-52 ml-2 pt-2">
         <div className="flex justify-between px-14 pb-5">
           <h1 className=" text-xl font-bold ">Product Details</h1>
           <div className="flex justify-center">
@@ -133,21 +139,22 @@ function ProductDetailsScreen() {
         <div className="flex justify-evenly ">
           <div>
             <h2 className="text-xl font-bold pt-5">Product Review List</h2>
-            
-            {product.reviews && product.reviews.map((item, index) => {
-              return (
-                <div>
-                  <div className="flex items-center">
-                    <Avatar sx={{ width: 24, height: 24 }} />
-                    <p className="pl-3">{item.name}</p>
+
+            {product.reviews &&
+              product.reviews.map((item, index) => {
+                return (
+                  <div>
+                    <div className="flex items-center">
+                      <Avatar sx={{ width: 24, height: 24 }} />
+                      <p className="pl-3">{item.name}</p>
+                    </div>
+                    <div></div>
+                    <div className="pl-8">
+                      <p>{item.comment}</p>
+                    </div>
                   </div>
-                  <div></div>
-                  <div className="pl-8">
-                    <p>{item.comment}</p>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
           <div className="text-xl font-bold">
             <h2>Review</h2>
@@ -158,7 +165,7 @@ function ProductDetailsScreen() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default ProductDetailsScreen

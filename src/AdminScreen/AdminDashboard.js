@@ -5,6 +5,7 @@ import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantity
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import AreacChart from "../Component/AreacChart";
+import MobileSidebar from "../Component/MobileSidebar";
 import Notification from '../Component/Notification';
 import Sidebar from "../Component/Sidebar";
 import "../Css/SellerDashboard.css";
@@ -72,6 +73,9 @@ function AdminDashboard() {
       <div className="hidden lg:block">
         <Sidebar />
       </div>
+      <div className="lg:hidden">
+        <MobileSidebar />
+      </div>
       <div className="lg:ml-52">
         <div className="Order_information flex flex-col justify-center items-center lg:flex-row lg:justify-between ">
           <div className="flex p-3 h-1/4 py-12 lg:py-7 w-10/12 lg:w-1/5  text-violet-600 bg-white justify-around items-center rounded-lg drop-shadow-xl mb-4">
@@ -98,15 +102,18 @@ function AdminDashboard() {
           </div>
           <div className="flex p-3 h-1/4 py-12 w-10/12 lg:py-7  lg:w-1/5 text-violet-600 bg-white justify-around items-center rounded-lg drop-shadow-xl my-4">
             <div className="left">
-              {totalSelles.length > 0 ? totalSelles.map((item,index) => (
-                <h1 className=" text-3xl font-extrabold text-center ">
-                  {item.totalSelles}
-                </h1>
-              )) :
-              <h1 className=" text-3xl font-extrabold text-center ">
-                  {0}
-                </h1>
-              }
+              {totalSelles.length > 0 ? (
+                totalSelles.map((item, index) => (
+                  <h1
+                    key={index}
+                    className=" text-3xl font-extrabold text-center "
+                  >
+                    {item.totalSelles}
+                  </h1>
+                ))
+              ) : (
+                <h1 className=" text-3xl font-extrabold text-center ">{0}</h1>
+              )}
 
               <p>Total Sales</p>
             </div>
