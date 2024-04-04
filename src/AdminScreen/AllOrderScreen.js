@@ -3,6 +3,7 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import MobileSidebar from "../Component/MobileSidebar";
 import Sidebar from "../Component/Sidebar";
 import { Store } from "../Store";
 
@@ -52,9 +53,14 @@ function AllOrderScreen() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <div>
-      <Sidebar />
+      <div className="hidden lg:block">
+        <Sidebar />
+      </div>
+      <div className="lg:hidden">
+        <MobileSidebar />
+      </div>
 
-      <div className=" ml-52 relative overflow-x-auto shadow-md sm:rounded-lg">
+      <div className="lg:ml-52 ml-2 relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>

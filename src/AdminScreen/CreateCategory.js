@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { Store } from "../Store";
-import Sidebar from "../Component/Sidebar";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import MobileSidebar from "../Component/MobileSidebar";
+import Sidebar from "../Component/Sidebar";
+import { Store } from "../Store";
 
 function CreateCategory() {
   const navigate = useNavigate();
@@ -76,8 +77,13 @@ function CreateCategory() {
 
   return (
     <div>
-      <Sidebar />
-      <div className=" ml-52 create__category">
+      <div className="hidden lg:block">
+        <Sidebar />
+      </div>
+      <div className="lg:hidden">
+        <MobileSidebar />
+      </div>
+      <div className=" lg:ml-52 ml-2 create__category">
         <div>
           <h1 className="text-4xl text-cyan-500 font-bold">Create Category</h1>
         </div>
