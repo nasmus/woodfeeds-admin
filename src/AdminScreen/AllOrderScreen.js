@@ -30,15 +30,21 @@ function AllOrderScreen() {
   }, [userInfo.token]);
 
   const handleDelete = async (id) => {
-    try {
-      const response = await axios.delete(`/api/orderdelete/${id}`, {
-        headers: { Authorization: `Bearer ${userInfo.token}` },
-      });
-      alert('Order deleted succesfully!')
-    } catch (err) {
-      alert("Failed to delete product!");
-      
-    }
+    // eslint
+    const result = window.confirm("Are you sure?");
+
+    if (result) {
+        try {
+          const response = await axios.delete(`/api/orderdelete/${id}`, {
+            headers: { Authorization: `Bearer ${userInfo.token}` },
+          });
+          alert("Deleted successfully!");
+          window.location.reload();
+        } catch (err) {
+          alert("Failed to delete product!");
+        }
+    } 
+
   }
 
   // Calculate the indexes for the products to be displayed on the current page
