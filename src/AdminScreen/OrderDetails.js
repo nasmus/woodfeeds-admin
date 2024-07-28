@@ -63,6 +63,7 @@ function OrderDetails() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+
     try {
       await axios.put(
         `/api/order/status/${orderId}`,
@@ -73,6 +74,7 @@ function OrderDetails() {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         }
       );
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -105,6 +107,7 @@ function OrderDetails() {
                 name="rderStatus"
                 id="status"
                 value={orderStatus}
+                defaultValue={orderStatus}
                 onChange={(e) => setOrderStatus(e.target.value)}
                 className="bg-gray-50 border border-gray-300 text-gray-900  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full md:px-6 p-2 "
               >
@@ -210,6 +213,7 @@ function OrderDetails() {
             </div>
           </section>
         </div>
+        // INVOICE SECTION START
         <div ref={printRef} className="hidden print:block mx-28 text-black">
           <h2 className="text-6xl pt-10 text-black font-semibold text-center">
             woodfeeds.com
