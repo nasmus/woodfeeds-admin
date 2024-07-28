@@ -213,7 +213,7 @@ function OrderDetails() {
             </div>
           </section>
         </div>
-        // INVOICE SECTION START
+         {/* INVOICE SECTION START */}
         <div ref={printRef} className="hidden print:block mx-28 text-black">
           <h2 className="text-6xl pt-10 text-black font-semibold text-center">
             woodfeeds.com
